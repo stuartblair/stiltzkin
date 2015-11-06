@@ -34,25 +34,30 @@
 ;; the set of functions dealing with spacing and the set of functions that
 ;; deal with capitalization?
 
-(def mutators (map comp (combo/cartesian-product whitespace-mutators capitalization-mutators)))
-(count mutators)
-(def possibilities
-  (juxt with-leading-space as-is with-trailing-space))
+(def composed
+  (fn [args]
+    (apply comp args)))
+
+(def mutators (map composed (combo/cartesian-product whitespace-mutators capitalization-mutators)))
 
 ;; I'm assuming there's duplication here that will need to be removed from the
 ;; functions and so (with-leading-space (str/upper-case w))
 ;; will be commutative. Then again, maybe it will try and capitalize the
 ;; leading whitespace. That's one to check.
 
-;;(def possibilities
-;;  (apply juxt mutators))
+(def word-variations
+  (apply juxt mutators))
 
 
-(possibilities "stuart")
-(str/lower-case "HELLO")
-(str/upper-case "Hello")
+;;(let [words ["stuart" "pamela" "lachlan" "struan"]]
+;;    (apply combo/cartesian-product (map word-variations words)))
+;;    (combo/cartesian-product (map word-variations words)))
+
+(def phrase-variations
+  (fn [words]
+    (apply combo/cartesian-product (map word-variations words))))
 
 (defn -main
   "Generates possible combinations for a passphrase given the ordered list of element words"
   [& args]
-  (println "Hello, World!"))
+  (println (count (phrase-variations args))))
