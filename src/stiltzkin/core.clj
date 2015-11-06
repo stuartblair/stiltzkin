@@ -48,11 +48,6 @@
 (def word-variations
   (apply juxt mutators))
 
-
-;;(let [words ["stuart" "pamela" "lachlan" "struan"]]
-;;    (apply combo/cartesian-product (map word-variations words)))
-;;    (combo/cartesian-product (map word-variations words)))
-
 (def phrase-variations
   (fn [words]
     (apply combo/cartesian-product (map word-variations words))))
@@ -60,4 +55,4 @@
 (defn -main
   "Generates possible combinations for a passphrase given the ordered list of element words"
   [& args]
-  (println (count (phrase-variations args))))
+  (println (map str/join (phrase-variations args))))
