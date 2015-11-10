@@ -11,6 +11,8 @@
 ;; Passphrase may have had a newline at the end or not
 ;; Passphrase may have had a carriage return at the end or not
 ;; Passphrase may have had a space at the end or not
+;; You are more likely to fatfinger an upper key from the home position than 
+;; the lower position.
 
 (def with-trailing-space
   (fn [w]
@@ -45,3 +47,4 @@
   "Generates possible combinations for a passphrase given the ordered list of element words"
   [& args]
   (doseq [passphrase-attempt (map str/join (phrase-variations args))] (println passphrase-attempt)))
+
