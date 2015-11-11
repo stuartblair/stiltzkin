@@ -39,6 +39,7 @@
   (fn [words]
     (apply combo/cartesian-product (map word-variations words))))
 
+
 (defn -main
   "Generates possible combinations for a passphrase given the ordered list of element words"
   [& args]
