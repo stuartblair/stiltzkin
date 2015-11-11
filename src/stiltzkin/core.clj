@@ -22,11 +22,7 @@
   (fn [w]
     (str " " w)))
 
-(def as-is
-  (fn [w]
-    w))
-
-(def whitespace-mutators [with-leading-space as-is with-trailing-space])
+(def whitespace-mutators [with-leading-space identity with-trailing-space])
 
 (def capitalization-mutators [str/lower-case str/upper-case str/capitalize])
 
